@@ -265,8 +265,17 @@ const productos = [
   }
 ]
 
-export const getProducts = () => {
+export const getProducts = (categoryId) => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(productos), 2000)
+    setTimeout(() => {
+      if (categoryId === undefined) resolve(productos)
+      else resolve(productos.filter((producto) => producto.category === categoryId))
+    }, 2000)
+  })
+}
+
+export const getSingleProduct = (itemId) => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(productos.find((product) => product.id === Number(itemId))), 2000)
   })
 }

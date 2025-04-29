@@ -3,8 +3,6 @@ import { useState } from 'react'
 function ItemCount() {
   const [contador, setContador] = useState(0)
 
-  const color = 'red'
-
   function sumar() {
     setContador(contador + 1)
   }
@@ -14,11 +12,11 @@ function ItemCount() {
   }
 
   return (
-    <>
+    <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
       <button onClick={restar}>-</button>
-      <h1 style={{ color: color }}>{contador}</h1>
+      <h1>{contador}</h1>
       <button onClick={sumar}>+</button>
-    </>
+    </div>
   )
 }
 
