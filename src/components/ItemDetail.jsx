@@ -1,14 +1,14 @@
 import ItemCount from './ItemCount'
 
-const ItemDetail = (props) => {
+const ItemDetail = ({ product }) => {
   return (
     <div className={'card'}>
-      <p className={'card-title'}>{props.product?.title}</p>
+      <p className={'card-title'}>{product?.title}</p>
       <div className={'card-content'}>
-        <img src={props.product?.pictureUrl}></img>
-        <p>{props.product?.description}</p>
-        <p>Precio: {props.product?.price}</p>
-        <ItemCount></ItemCount>
+        <img src={product?.pictureUrl}></img>
+        <p>{product?.description}</p>
+        <p>Precio: {product?.price}</p>
+        <ItemCount product={product}></ItemCount>
       </div>
     </div>
   )
