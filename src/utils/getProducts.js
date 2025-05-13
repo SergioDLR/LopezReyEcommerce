@@ -1,7 +1,7 @@
 const productos = [
   {
     id: 1,
-    title: ' Elden Ring (PC) - Steam Key',
+    title: 'Elden Ring (PC) - Steam Key',
     price: 7855,
     description:
       "Elden Ring es un juego de rol de fantasía oscura desarrollado por FromSoftware y publicado gracias a Bandai Namco Entertainment. Es una aventura épica y desafiante creada por los desarrolladores de Demon's Souls.",

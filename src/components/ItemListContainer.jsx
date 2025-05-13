@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { getProducts } from '../utils/getProducts'
 import ItemList from './ItemList'
 import { useParams } from 'react-router-dom'
+import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
 
 function ItemListContainer() {
   const [products, setProducts] = useState([])
@@ -10,12 +10,21 @@ function ItemListContainer() {
 
   useEffect(() => {
     setLoading(true)
-    getProducts(categoryId)
-      .then((productsFromPromise) => {
-        setProducts(productsFromPromise)
+    const db = getFirestore()
+    const collectionRef = collection(db, 'products')
+    const queryCollection = categoryId ? query(collectionRef, where('category', '==', categoryId)) : collectionRef
+
+    getDocs(queryCollection)
+      .then((response) => {
+        const responseMapped = response.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        setProducts(responseMapped)
+      })
+      .catch(() => {
+        console.log('Error al cargar los productos')
+      })
+      .finally(() => {
         setLoading(false)
       })
-      .catch((error) => console.log(error))
   }, [categoryId])
 
   if (loading) return <span className="loader"></span>
