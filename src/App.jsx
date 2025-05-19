@@ -12,6 +12,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      {import.meta.env.VITE_A}
       <CartProvider>
         <Navbar></Navbar>
         <Routes>
