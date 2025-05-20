@@ -30,6 +30,7 @@ function ItemListContainer() {
   if (loading) return <span className="loader"></span>
   return (
     <div>
+      <h1>Bienvenido a mi ecommerce</h1>
       <ItemList products={products}></ItemList>
     </div>
   )
