@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { cartContext } from './CartContext'
+import Swal from 'sweetalert2'
 
 function ItemCount({ product }) {
   const { onAdd } = useContext(cartContext)
@@ -7,11 +8,12 @@ function ItemCount({ product }) {
   const [contador, setContador] = useState(0)
 
   function sumar() {
-    setContador(contador + 1)
+    if (contador < product.stock) setContador(contador + 1)
+    else Swal.fire(`El stock disponible del producto es de maximo ${product.stock}`)
   }
 
   function restar() {
-    setContador(contador - 1)
+    if (contador > 0) setContador(contador - 1)
   }
 
   return (

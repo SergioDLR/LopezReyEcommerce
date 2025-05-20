@@ -1,4 +1,4 @@
-import { addDoc, collection, getFirestore, serverTimestamp } from 'firebase/firestore'
+import { addDoc, collection, doc, getFirestore, serverTimestamp, updateDoc } from 'firebase/firestore'
 import { useContext, useState } from 'react'
 import { cartContext } from './CartContext'
 import { useNavigate } from 'react-router-dom'
@@ -13,6 +13,7 @@ const Checkout = () => {
   const [phone, setPhone] = useState(0)
 
   const navigate = useNavigate()
+  console.log(cart)
   const handleCreaterOrder = () => {
     const MySwal = withReactContent(Swal)
 
@@ -37,6 +38,11 @@ const Checkout = () => {
           title: `Tu orden se creo correctamente el id es : ${response.id}`
         })
 
+        //actualizar el stock de todos los productos que compro
+        cart.forEach((cartProduct) => {
+          const docRef = doc(db, 'products', cartProduct.product.id)
+          updateDoc(docRef, { stock: cartProduct.product.stock - cartProduct.quantity })
+        })
         cleanCart()
         navigate('/')
       })
